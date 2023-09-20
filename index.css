@@ -1,0 +1,99 @@
+
+body{
+    background-image: url("https://i.pinimg.com/originals/0f/92/32/0f923286f223ca846767278072d40a0b.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1000px;
+}
+.Buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1px;
+    width: 330px;
+    height: 310px;
+    margin-right: 300px;
+}
+
+.Bracket-c,
+.Bracket-o,
+.Nine,
+.Four,
+.Five,
+.Plus,
+.Zero,
+.Clear,
+.Seven,
+.Eight,
+.Three,
+.Point,
+.Equal,
+.Delete,
+.Division,
+.Multiply,
+.Six,
+.One,
+.Two,
+.Plusminus,
+.Minus {
+   font-size: 43.2px;
+   text-align: center;
+   width: 100px;
+   height: 80px;
+}
+
+.Clear,
+.Seven,
+.Four,
+.One,
+.Zero{
+    background-color: blue;
+}
+
+.Bracket-o,
+.Eight,
+.Five,
+.Two,
+.Point,
+.Bracket-c,
+.Nine,
+.Six,
+.Three,
+.Plusminus{
+    background-color: yellow;
+}
+.Multiply,
+.Minus,
+.Plus,
+.Division,
+.Delete{
+    background-color: red;
+}
+
+.Equal {
+    background-color: rebeccapurple;
+    color: white;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 250px;
+    font-size: 5em
+}
+.info {
+    display: flex;
+    justify-content: center;
+    font-size: 4em;
+}
+a {
+    color: blue;
+    text-decoration: none;
+}
