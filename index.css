@@ -42,7 +42,9 @@ body{
     border: 2px solid gray;
     height: 305px;
 }
-.Root, .Bracket-c, .Bracket-o, .Nine, .Four, .Five, .Plus, .Zero, .Clear, .Seven, .Eight, .Three, .Point, .Equal, .Delete, .Division, .Multiply, .Six, .One, .Two, .Plusminus, .Minus {
+#RootCross, #CloseBracket, #OpenBracket, #nine, #four, #five, #PlusCross, #zero, #C, 
+#seven, #eight, #three, #decimal, #EqualButton, #Del , #DivisionCross, #MultiplyCross, #six, 
+#one, #two, #plusMinusButton, #MinusCross {
    font-size: 2.7em;
    text-align: center;
    width: 80px;
@@ -50,25 +52,24 @@ body{
    transition: all .1s ease;
 }
 
-.Clear, .Seven, .Four, .One, .Zero{
+#C, #seven, #four, #one, #zero{
     background-color: blue;
 }
 
-.Bracket-o, .Eight, .Five, .Two, .Point, .Bracket-c, .Nine, .Six, .Three, .Plusminus{
+#OpenBracket, #eight, #five, #two, #decimal, #CloseBracket, #nine, #six, #three, #plusMinusButton{
     background-color: yellow;
 }
-.Multiply, .Root, .Minus, .Plus, .Division, .Delete{
+#MultiplyCross, #RootCross, #MinusCross, #PlusCross, #DivisionCross, #Del{
     background-color: red;
 }
 
-.Equal {
+#EqualButton {
     background-color: rebeccapurple;
     height: 240px;
     color: white;
 }
 
 
-/* Title and more information */
 .title {
     display: flex;
     justify-content: center;
@@ -85,7 +86,6 @@ a {
     text-decoration: none;
 }
 
-/* when Pressed */
 
 .pressed {
     color: aqua !important;
