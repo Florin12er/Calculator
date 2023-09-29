@@ -19,9 +19,8 @@ body{
     width: 405px;
     height: 405px;
     margin-bottom: 300px;
-    box-shadow: 5px 5px 5px 5px yellow;
 }
-.display {
+#display {
     text-align: right;
     font-size: 3em;
     border: 2px solid gray;
@@ -42,8 +41,8 @@ body{
     border: 2px solid gray;
     height: 305px;
 }
-#RootCross, #CloseBracket, #OpenBracket, #nine, #four, #five, #PlusCross, #zero, #C, 
-#seven, #eight, #three, #decimal, #EqualButton, #Del , #DivisionCross, #MultiplyCross, #six, 
+#RootCross, #PercentSign, #PowerSign, #nine, #four, #five, #PlusCross, #zero, #C, 
+#eight,#seven,#three, #decimal, #EqualButton, #Del , #DivisionCross, #MultiplyCross, #six, 
 #one, #two, #plusMinusButton, #MinusCross {
    font-size: 2.7em;
    text-align: center;
@@ -52,11 +51,11 @@ body{
    transition: all .1s ease;
 }
 
-#C, #seven, #four, #one, #zero{
+#C,  #four, #one,#seven, #zero{
     background-color: blue;
 }
 
-#OpenBracket, #eight, #five, #two, #decimal, #CloseBracket, #nine, #six, #three, #plusMinusButton{
+#PercentSign, #eight, #five, #two, #decimal, #PowerSign, #nine, #six, #three, #plusMinusButton{
     background-color: yellow;
 }
 #MultiplyCross, #RootCross, #MinusCross, #PlusCross, #DivisionCross, #Del{

@@ -1,127 +1,195 @@
-const display = document.querySelector(".display");
-const operators = document.querySelectorAll(".Operator")
- const numbers = document.querySelectorAll(".numbers")
+let displayValue = '0';
+let firstOperand = null;
+let secondOperand = null;
+let firstOperator = null;
+let secondOperator = null;
+let result = null;
+const buttons = document.querySelectorAll('button');
 
-// Buttons for calculations
-const plusButton = document.querySelector("#PlusCross");
-const minusButton = document.querySelector("#MinusCross");
-const multiplyButton = document.querySelector("#MultiplyCross");
-const divideButton = document.querySelector("#DivisionCross");
-const equalButton = document.querySelector("#EqualButton");
-const clearButton = document.querySelector("#C");
-const decimalButton = document.querySelector("#decimal");
-const plusMinusButton = document.querySelector("#plusMinusButton");
+window.addEventListener('keydown', function(e){
+  const key = document.querySelector(`button[data-key='${e.keyCode}']`);
+  key.click();
+});
 
-
-function add([...args]) {
- let result = 0;
- args.forEach(arg => result += arg);
- return result;
-}
-
-function subtract([a, b = 0, ...args]) {
-  let result = a - b;
-  args.forEach(arg => result += arg);
-  return result;
-}
-
-function multiply([...array]) {
-  let result = 1;
-  for (let num of array) {
-  result *= num;
-}
-return result;
-}
-
-function divide(a , b = 1, ...args) {
-  let result = a / b;
-  for (i = 0; i < args.length; i++) result /= args[i];
-  return result;
-}
-
-
-let operations = {inputs: [], sign: ""};
-let inputs = operations.inputs;
-let sign = operations.sign;
-let Output = display.dataset;
-
-
-function operate() {
-  if (Output.input) inputs.push(+Output.input);
-  if (sign == "plus") {
-    inputs = [add(inputs)];
-    display.textContent = add(inputs);
-  } else if (sign == "minus") {
-    inputs = [subtract(inputs)]
-    display.textContent = subtract(inputs);
-  } else if (sign == "cross") {
-    inputs = [multiply(inputs)];
-    display.textContent = multiply(inputs);
-  } else if (sign == "divide") {
-    inputs = [divide(inputs)];
-    display.textContent = divide(inputs);
-  }
-
-  sign = "";
-  Output.input = "";
-}
-
-
-display.textContent = "0";
-numbers.forEach(button => button.addEventListener("click", () => {
-    if (sign == "equal") {
-        inputs = [];
-        sign = "";
+function updateDisplay() {
+    const display = document.getElementById('display');
+    display.innerText = displayValue;
+    if(displayValue.length > 9) {
+        display.innerText = displayValue.substring(0, 9);
     }
-    Output.input += button.id;
-    display.textContent = Output.input
-}))
-
-decimalButton.addEventListener("click", () => {
-    if (Output.input == "") {
-        Output.input += "0.";
-        display.textContent = Output.input;
-    }
-    if (!Output.input.includes(".")) {
-        Output.input += ".";
-        display.textContent = Output.input;
-    }
-})
-
-plusMinusButton.addEventListener("click", () => {
-    if (inputs == "" && !Output.input) return;
-    if (Output.input) {
-        inputs[0] *= -1;
-        display.textContent = inputs[0];
-    }
-})
-
-operators.forEach(button => button.addEventListener("click", () => {
-    if (sign) operate();
-    if (Output.input) inputs.push(+Output.input);
-    Output.input = "";
-    sign = button.id;
-}))
-
-
-equalButton.addEventListener("click", () => {
-    if (Output.input) operate();
-    sign = "equal";
-})
-
-clearButton.addEventListener("click", () => {
-    Output.input = "";
-    display.textContent = "0";
-    inputs = [];
-    sign = "";
-})
-
-function stylePressed(e) {
-    if (!e.target.id) return;
-    display.classList.add("displayAction");
-    display.addEventListener("transitionend", () => display.classList.remove("displayAction"));
-    const button = document.getElementById(`${e.target.id}`);
-    button.classList.add("pressed");
-    button.addEventListener("transitionend", () => button.classList.remove("pressed"));
 }
-window.addEventListener("click", stylePressed);
+  
+updateDisplay();
+
+function clickButton() {
+    for(let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            if(buttons[i].classList.contains('numbers')) {
+                inputOperand(buttons[i].value);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('Operator')) {
+                inputOperator(buttons[i].value);
+            } else if(buttons[i].classList.contains('Equal')) {
+                inputEquals();
+                updateDisplay();
+            } else if(buttons[i].classList.contains('Delete')) {
+                Delete(displayValue);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('PowerOf2')) {
+                exponent(displayValue);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('Root')) {
+                inputRoot(displayValue);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('Point')) {
+                inputDecimal(buttons[i].value);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('Percent')) {
+                inputPercent(displayValue);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('sign')) {
+                inputSign(displayValue);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('Clear'))
+                clearDisplay();
+                updateDisplay();
+        }
+    )}
+}
+
+clickButton();
+
+
+
+function inputOperand(operand) {
+    if(firstOperator === null) {
+        if(displayValue === '0' || displayValue === 0) {
+            displayValue = operand;
+        } else if(displayValue === firstOperand) {
+            displayValue = operand;
+        } else {
+            displayValue += operand;
+        }
+    } else {
+        if(displayValue === firstOperand) {
+            displayValue = operand;
+        } else {
+            displayValue += operand;
+        }
+    }
+}
+
+
+function inputOperator(operator) {
+    if(firstOperator != null && secondOperator === null) {
+        secondOperator = operator;
+        secondOperand = displayValue;
+        result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
+        displayValue = roundAccurately(result, 15).toString();
+        firstOperand = displayValue;
+        result = null;
+    } else if(firstOperator != null && secondOperator != null) {
+        secondOperand = displayValue;
+        result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
+        secondOperator = operator;
+        displayValue = roundAccurately(result, 15).toString();
+        firstOperand = displayValue;
+        result = null;
+    } else { 
+        firstOperator = operator;
+        firstOperand = displayValue;
+    }
+}
+
+function inputEquals() {
+    if(firstOperator === null) {
+        displayValue = displayValue;
+    } else if(secondOperator != null) {
+        secondOperand = displayValue;
+        result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
+        if(result === 'lmao') {
+            displayValue = 'lmao';
+        } else {
+            displayValue = roundAccurately(result, 15).toString();
+            firstOperand = displayValue;
+            secondOperand = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    } else {
+        secondOperand = displayValue;
+        result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
+        if(result === 'lmao') {
+            displayValue = 'lmao';
+        } else {
+            displayValue = roundAccurately(result, 15).toString();
+            firstOperand = displayValue;
+            secondOperand = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    }
+}
+
+function inputDecimal(dot) {
+    if(displayValue === firstOperand || displayValue === secondOperand) {
+        displayValue = '0';
+        displayValue += dot;
+    } else if(!displayValue.includes(dot)) {
+        displayValue += dot;
+    } 
+}
+function Delete() {
+    displayValue = displayValue.slice(0, -1)
+}
+
+function inputPercent(num) {
+    displayValue = (num/100).toString();
+}
+function inputRoot(num) {
+    displayValue = Math.sqrt(num);
+}
+function exponent(num) {
+    displayValue = num * num;
+}
+function inputSign(num) {
+    displayValue = (num * -1).toString();
+}
+
+function clearDisplay() {
+    displayValue = '0';
+    firstOperand = null;
+    secondOperand = null;
+    firstOperator = null;
+    secondOperator = null;
+    result = null;
+}
+
+function inputBackspace() {
+    if(firstOperand != null) {
+        firstOperand = null;
+        updateDisplay();
+    }
+}
+
+function operate(x, y, op) {
+    if(op === '+') {
+        return x + y;
+    } else if(op === '-') {
+        return x - y;
+    } else if(op === '*') {
+        return x * y;
+    } else if(op === '/') {
+        if(y === 0) {
+            return 'lmao';
+        } else {
+        return x / y;
+        }
+    }
+}
+
+function roundAccurately(num, places) {
+    return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
+}
