@@ -1,1 +1,43 @@
-# Calculator
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="Stylesheet" href="index.css">
+</head>
+<body>
+    <div class="title">Romania calculator 🇷🇴</div>
+  <div class="container">
+    <div class="calculator">
+ <div id="display"></div>
+<div class="Buttons">
+    <button type="button" value="clear" class="Clear" id="C">C</button>
+    <button type="button" value="7" class="numbers" id="seven">7</button>
+    <button type="button" value="4" class="numbers" id="four">4</button>
+    <button type="button" value="1" class="numbers" id="one" >1</button>
+    <button type="button" value="0"class="numbers" id="zero" >0</button>
+    <button type="button" value="%"  class="Percent" id="PercentSign">%</button>
+    <button type="button" value="8" class="numbers" id="eight">8</button>
+    <button type="button" value="5" class="numbers" id="five">5</button>
+    <button type="button" value="2" class="numbers" id="two">2</button>
+    <button type="button" value="."  class="Point" id="decimal">.</button>
+    <button type="button" value="^"  class="PowerOf2" id="PowerSign">x²</button>
+    <button type="button" value="9" class="numbers" id="nine">9</button>
+    <button type="button" value="6" class="numbers" id="six">6</button>
+    <button type="button" value="3" class="numbers" id="three">3</button>
+    <button type="button" value="sign" class="sign" id="plusMinusButton" >+/-</button>
+    <button type="button" value="Del" class="Delete" id="Del">Del</button>
+    <button type="button" value="*" class="Operator" id="MultiplyCross">*</button>
+    <button type="button" value="+" class="Operator" id="PlusCross">+</button>
+    <button type="button" value="-" class="Operator" id="MinusCross">-</button>
+    <button type="button" value="/" class="Operator" id="DivisionCross">/</button>
+    <button type="button" value="√" class="Root" id="RootCross">√</button>
+    <button type="button" value="=" class="Equal" id="EqualButton">=</button>
+</div>
+</div>
+  </div>
+<div class="info"><a href="https://youtu.be/dQw4w9WgXcQ?feature=shared" >More information press here</a></div>
+<script src="calculator.js" ></script>
+</body>
+</html>
